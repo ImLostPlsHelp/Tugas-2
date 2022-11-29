@@ -1,0 +1,71 @@
+package io;
+import java.util.*;
+
+public class tugas2 {
+    public static void main(String[] args) {
+        Scanner tugas2 = new Scanner(System.in);
+
+        String jnskiriman = tugas2.next();
+        double beratkiriman = tugas2.nextDouble();
+        double panjangkiriman = tugas2.nextDouble();
+        double lebarkiriman = tugas2.nextDouble();
+        double tinggikiriman = tugas2.nextDouble();
+        String jenislayanan = tugas2.next();
+
+        double cek_volumetrik = panjangkiriman * lebarkiriman * tinggikiriman / 3000;
+
+        //Jenis Kiriman
+        if (jnskiriman.equalsIgnoreCase("DOKUMEN")) {
+            System.out.print("DOKUMEN");
+        }
+        else if (jnskiriman.equalsIgnoreCase("PAKET")) {
+            System.out.print("PAKET");
+        }
+
+        // Status
+        if (jenislayanan.equalsIgnoreCase("PICKUP")) {
+            System.out.print(" DIAMBIL DAN DITERIMA");
+        }
+        else if (jenislayanan.equalsIgnoreCase("ANTARSENDIRI")) {
+            System.out.print(" DITERIMA");
+        }
+
+        //JenisBiaya
+        if (cek_volumetrik > beratkiriman) {
+            System.out.print("\nBIAYA_VOLUMETRIK");
+        }
+        else if(cek_volumetrik < beratkiriman) {
+            System.out.print("\nBIAYA_BERAT");
+        }
+
+        //Berat Pembulatan
+        double beratkirimanbulat = Math.round(beratkiriman);
+        System.out.printf("\nBERAT_PEMBULATAN %.0f", beratkirimanbulat);
+
+        //Berat Volumetrik
+        System.out.printf("\nBERAT_VOLUMETRIK %.2f", cek_volumetrik);
+
+        //Total Biaya
+        if (jenislayanan.equalsIgnoreCase("PICKUP")) {
+            if (beratkiriman > cek_volumetrik) {
+            double totalbiayaberatpickup = beratkirimanbulat * 100000 + 4000;
+            System.out.printf("\nTOTAL %.0f", totalbiayaberatpickup);
+            }
+            else if (beratkiriman < cek_volumetrik) {
+            double totalbiayavolupickup = cek_volumetrik * 100000 + 4000;
+            System.out.printf("\nTOTAL %.0f", totalbiayavolupickup);
+        }
+    }
+        else if (jenislayanan.equalsIgnoreCase("ANTARSENDIRI")) {
+            if (beratkiriman > cek_volumetrik) {
+                double totalbiayaberat = beratkirimanbulat * 100000;
+                System.out.printf("\nTOTAL %.0f", totalbiayaberat);
+                }
+                else if (beratkiriman < cek_volumetrik) {
+                double totalbiayavolu = cek_volumetrik * 100000;
+                System.out.printf("\nTOTAL %.0f", totalbiayavolu);
+            }
+        }
+    }
+    
+}
